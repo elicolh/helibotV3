@@ -5,18 +5,21 @@ var guild;var scoreChannel;var members;var scoreMessage
 var fileSave = __dirname + "/save.json";
 var saveDir = __dirname + "/saves/"
 const roles = [
-    {seuil:100000,id:"710969412093476925"},
-    {seuil:50000,id:"710973545773138030"},
-    {seuil:25000,id:"710972777170993164"},
-    {seuil:10000,id:"710974492566093867"},
-    {seuil:5000,id:"710974719448449118"},
-    {seuil:1500,id:"710975161314181174"},
-    {seuil:500,id:"710975465678045226"}
-]
+    { id: "550342067210027030", seuil: 75000, name: "elite" },
+    { id: "550343591239614467", seuil: 50000, name: "batracien" },
+    { id: "550343935869059073", seuil: 25000, name: "abu yaqub" },
+    { id: "550343939744333836", seuil: 20000, name: "erudit" },
+    { id: "550343942437077002", seuil: 15000, name: "wakam" },
+    { id: "550343944018329611", seuil: 10000, name: "cresus" },
+    { id: "550344215666753538", seuil: 5000, name: "damoiseau" },
+    { id: "550344219341094932", seuil: 1500, name: "strapontin" },
+    { id: "550344217524961310", seuil: 500, name: "cul-terreux" },
+    { id: "546359889014947850", seuil: 0, name: "subalternes" }
+  ];
 client.on("ready",()=>{
     console.log("bot started...")
-    guild = client.guilds.cache.find(e=>e.id=="706503185266769990");
-    scoreChannel = guild.channels.cache.array().find(e=>e.id=="711250866581274624")
+    guild = client.guilds.cache.find(e=>e.id=="532956456492728320");
+    scoreChannel = guild.channels.cache.array().find(e=>e.name=="classement_points")
     scoreChannel.messages.fetch({limit:100}).then(messages=>{
         messages.array().forEach(async (message)=>{
             await message.delete()
@@ -110,8 +113,8 @@ function makeEmbed(){
 
     var msg = new discord.MessageEmbed()
     msg.setAuthor(
-        "Yasuke",
-        "https://cdn.discordapp.com/attachments/706503185266769993/710985435609825360/diable-samurai-mascotte-e-sport_96628-73.png"
+        "helibot",
+        "https://images-na.ssl-images-amazon.com/images/I/615Q1Ms%2Bb4L._SX425_.jpg"
       )
       msg.setColor(0)
       msg.setTitle("scores des 15 premiers :")
@@ -141,4 +144,4 @@ function inVocal(memb){
     if(guildmember.voice.selfMute || guildmember.voice.selfDeaf)return false//si sourd ou muet
     return true
 }
-client.login(require("token"))
+client.login(require("./token.js"))
